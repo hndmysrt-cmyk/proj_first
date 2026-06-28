@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>جارٍ معالجة البيانات وتدريب النموذج</title>
+    <style>
+        body { font-family: sans-serif; background: #f5f5f5; text-align: center; padding-top: 150px; }
+        .spinner { width: 80px; height: 80px; border: 8px solid #ddd; border-top: 8px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite; margin: auto; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        h2 { margin-top: 25px; color: #333; }
+    </style>
+</head>
+<body>
+    <div class="spinner"></div>
+    <h2>    عرض بيانات الاستهلا ك</h2>
+    <h2>       عرض بيانات الطقس </h2>
+
+    <h2>      تدريب النموذج </h2>
+    <h2>     عرض  نتيجة تدريب النموذج    </h2>
+
+    
+
+    
+
+    
+    <form id="trainForm" action="/preprocess" method="POST" style="display:none;">
+        <input type="hidden" name="date" value="{{ user_data.date }}">
+        <input type="hidden" name="temperature" value="{{ user_data.temperature }}">
+        <input type="hidden" name="working_day" value="{{ user_data.working_day }}">
+        <input type="hidden" name="devices" value="{{ user_data.devices }}">
+    </form>
+ <button onclick="goToLogin()">
+              <a href="sc5.html">واجهة نتيجة التنبؤ   </a>
+
+                </button>
+    <script>
+        window.onload = function(){
+            document.getElementById("trainForm").submit();
+        }
+    </script>
+</body>
+</html>

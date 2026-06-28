@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>نتيجة التنبؤ</title>
+    <style>
+        body { background: #f4f4f4; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px;}
+        .card { background: white; width: 600px; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
+        .result { font-size: 32px; color: #28a745; font-weight: bold; margin: 15px 0; }
+        .mae { color: #ff9800; font-size: 20px; margin-bottom: 20px; }
+        img { width: 100%; max-width: 450px; border-radius: 8px; border: 1px solid #ddd; }
+        button { padding: 12px 25px; border: none; border-radius: 8px; color: white; cursor: pointer; margin-top: 20px; font-size: 16px; background: #667eea; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>نتيجة التنبؤ باستهلاك الطاقة الكهربائية</h2>
+        <div class="result">الاستهلاك المتوقع: {{ prediction }} kWh</div>
+        <div class="mae">رسم بياني يوضح الاستهلاك  (MAE) = {{ mae }}</div>
+        
+
+        <img src="{{ url_for('static', filename='loss.png') }}" alt="Loss Curve">
+        <br>
+
+        <button onclick="goToLogin()">
+              <a href="index.html">انتقال الي الشاشة الرئسية   </a>
+
+            
+               </button>
+        <button style="background: #e74c3c;" onclick="window.location.href='/logout'">تسجيل خروج</button>
+    </div>
+</body>
+</html>

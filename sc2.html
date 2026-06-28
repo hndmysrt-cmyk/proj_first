@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تسجيل البيانات</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h2>تسجيل البيانات الشخصية</h2>
+      <form id="loginForm" method="POST">
+        <input type="text" name="username" placeholder="اسم المستخدم" required>
+        <input type="password" name="password" placeholder="البريد الالكتروني" required>
+        <input type="text" name="company_id" placeholder="كلمة المرور " required>
+        <button type="submit">دخول</button>
+        <p id="error" style="color:red; margin-top:10px;"></p>
+      </form>
+
+            <button onclick="goToLogin()">
+              <a href="sc3.html">انتقال الي بيانات التنبؤ  </a>
+
+            
+               </button>
+
+
+
+
+          </div>
+  </div>
+</body>
+</html>
