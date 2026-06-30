@@ -2,41 +2,39 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>جارٍ معالجة البيانات وتدريب النموذج</title>
-    <style>
-        body { font-family: sans-serif; background: #f5f5f5; text-align: center; padding-top: 150px; }
-        .spinner { width: 80px; height: 80px; border: 8px solid #ddd; border-top: 8px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite; margin: auto; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        h2 { margin-top: 25px; color: #333; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جارٍ معالجة البيانات</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
 <body>
-    <div class="spinner"></div>
-    <h2>    عرض بيانات الاستهلا ك</h2>
-    <h2>       عرض بيانات الطقس </h2>
+    <main class="shell">
+        <nav class="topbar" aria-label="التنقل الرئيسي">
+            <a class="brand" href="{{ url_for('home') }}">
+                <span class="brand-mark">⚡</span>
+                <span>مؤشر الطاقة</span>
+            </a>
+        </nav>
 
-    <h2>      تدريب النموذج </h2>
-    <h2>     عرض  نتيجة تدريب النموذج    </h2>
+        <section class="processing">
+            <div>
+                <div class="spinner" aria-hidden="true"></div>
+                <h1>جارٍ معالجة البيانات وتدريب النموذج</h1>
+                <ul class="steps">
+                    <li>عرض بيانات الاستهلاك</li>
+                    <li>قراءة بيانات الطقس</li>
+                    <li>حساب التنبؤ</li>
+                    <li>تجهيز نتيجة النموذج</li>
+                </ul>
+            </div>
+        </section>
 
-    
-
-    
-
-    
-    <form id="trainForm" action="/preprocess" method="POST" style="display:none;">
-        <input type="hidden" name="date" value="{{ user_data.date }}">
-        <input type="hidden" name="temperature" value="{{ user_data.temperature }}">
-        <input type="hidden" name="working_day" value="{{ user_data.working_day }}">
-        <input type="hidden" name="devices" value="{{ user_data.devices }}">
-    </form>
- <button onclick="goToLogin()">
-              <a href="sc5.html">واجهة نتيجة التنبؤ   </a>
-
-                </button>
-    <script>
-        window.onload = function(){
-            document.getElementById("trainForm").submit();
-        }
-    </script>
+        <form data-auto-submit action="{{ url_for('preprocess') }}" method="POST" hidden>
+            <input type="hidden" name="date" value="{{ user_data.date }}">
+            <input type="hidden" name="temperature" value="{{ user_data.temperature }}">
+            <input type="hidden" name="working_day" value="{{ user_data.working_day }}">
+            <input type="hidden" name="devices" value="{{ user_data.devices }}">
+        </form>
+    </main>
 </body>
 </html>

@@ -1,27 +1,69 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نظام التنبؤ باستهلاك الطاقة الكهربائية</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <main class="shell">
+        <nav class="topbar" aria-label="التنقل الرئيسي">
+            <a class="brand" href="{{ url_for('home') }}">
+                <span class="brand-mark">⚡</span>
+                <span>مؤشر الطاقة</span>
+            </a>
+            <div class="nav-actions">
+                <a class="button secondary" href="{{ url_for('login') }}">تسجيل البيانات</a>
+            </div>
+        </nav>
 
-    <div class="container">
-        <h1>نظام للتنبؤ باستهلاك الطاقة الكهربائية</h1>
+        <section class="hero">
+            <div class="hero-copy">
+                <h1>نظام للتنبؤ باستهلاك الطاقة الكهربائية</h1>
+                <p>
+                    أدخل بيانات اليوم وعدد الأجهزة ودرجة الحرارة، وسيحسب النظام تقديرا فوريا
+                    للاستهلاك المتوقع بالكيلوواط ساعة مع مؤشر دقة مبسط.
+                </p>
+                <div class="actions">
+                    <a class="button" href="{{ url_for('login') }}">ابدأ الآن</a>
+                </div>
+            </div>
 
-        <p>
-            يعتمد النظام على نموذج LSTM للتنبؤ باستهلاك الطاقة الكهربائية
-            بناءً على البيانات المدخلة من المستخدم.
-        </p>
-
-        <button onclick="goToLogin()">
-            <a href="sc2.html">ابداء الان </a>
-            
-        </button>
-    </div>
-
-    <script src="script.js"></script>
+            <aside class="hero-panel" aria-label="مؤشرات نموذجية">
+                <div class="meter">
+                    <div class="meter-row">
+                        <span>الأجهزة</span>
+                        <div class="meter-line"><span style="--value: 78%"></span></div>
+                        <b>78%</b>
+                    </div>
+                    <div class="meter-row">
+                        <span>الحرارة</span>
+                        <div class="meter-line"><span style="--value: 64%"></span></div>
+                        <b>64%</b>
+                    </div>
+                    <div class="meter-row">
+                        <span>يوم عمل</span>
+                        <div class="meter-line"><span style="--value: 86%"></span></div>
+                        <b>86%</b>
+                    </div>
+                </div>
+                <div class="stat-strip">
+                    <div class="stat">
+                        <b>LSTM</b>
+                        <span>فكرة النموذج</span>
+                    </div>
+                    <div class="stat">
+                        <b>kWh</b>
+                        <span>وحدة النتيجة</span>
+                    </div>
+                    <div class="stat">
+                        <b>MAE</b>
+                        <span>مؤشر الخطأ</span>
+                    </div>
+                </div>
+            </aside>
+        </section>
+    </main>
 </body>
 </html>

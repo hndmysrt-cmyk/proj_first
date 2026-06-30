@@ -1,32 +1,53 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>تسجيل البيانات</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل البيانات</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <div class="container">
-    <div class="card">
-      <h2>تسجيل البيانات الشخصية</h2>
-      <form id="loginForm" method="POST">
-        <input type="text" name="username" placeholder="اسم المستخدم" required>
-        <input type="password" name="password" placeholder="البريد الالكتروني" required>
-        <input type="text" name="company_id" placeholder="كلمة المرور " required>
-        <button type="submit">دخول</button>
-        <p id="error" style="color:red; margin-top:10px;"></p>
-      </form>
+    <main class="shell">
+        <nav class="topbar" aria-label="التنقل الرئيسي">
+            <a class="brand" href="{{ url_for('home') }}">
+                <span class="brand-mark">⚡</span>
+                <span>مؤشر الطاقة</span>
+            </a>
+            <div class="nav-actions">
+                <a class="button secondary" href="{{ url_for('home') }}">الرئيسية</a>
+            </div>
+        </nav>
 
-            <button onclick="goToLogin()">
-              <a href="sc3.html">انتقال الي بيانات التنبؤ  </a>
+        <section class="panel-grid">
+            <div class="page-copy">
+                <h1>تسجيل البيانات الشخصية</h1>
+                <p>استخدم بريدا إلكترونيا وكلمة مرور لتبدأ جلسة إدخال بيانات التنبؤ.</p>
+            </div>
 
-            
-               </button>
-
-
-
-
-          </div>
-  </div>
+            <div class="card">
+                <h2>بيانات الدخول</h2>
+                {% if error %}
+                    <p class="error">{{ error }}</p>
+                {% endif %}
+                <form class="form-grid" action="{{ url_for('login') }}" method="POST">
+                    <label>
+                        اسم المستخدم
+                        <input type="text" name="username" autocomplete="name" required>
+                    </label>
+                    <label>
+                        البريد الإلكتروني
+                        <input type="email" name="email" autocomplete="email" required>
+                    </label>
+                    <label>
+                        كلمة المرور
+                        <input type="password" name="password" autocomplete="current-password" minlength="6" required>
+                    </label>
+                    <div class="actions">
+                        <button class="button" type="submit">دخول</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
