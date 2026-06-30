@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نظام التنبؤ باستهلاك الطاقة الكهربائية</title>
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <main class="shell">
         <nav class="topbar" aria-label="التنقل الرئيسي">
-            <a class="brand" href="index.html">
+            <a class="brand" href="{{ url_for('home') }}">
                 <span class="brand-mark">⚡</span>
                 <span>مؤشر الطاقة</span>
             </a>
             <div class="nav-actions">
-                <a class="button secondary" href="sc2.html">تسجيل البيانات</a>
+                <a class="button secondary" href="{{ url_for('login') }}">تسجيل البيانات</a>
             </div>
         </nav>
 
@@ -26,7 +26,7 @@
                     للاستهلاك المتوقع بالكيلوواط ساعة مع مؤشر دقة مبسط.
                 </p>
                 <div class="actions">
-                    <a class="button" href="sc2.html">ابدأ الآن</a>
+                    <a class="button" href="{{ url_for('login') }}">ابدأ الآن</a>
                 </div>
             </div>
 

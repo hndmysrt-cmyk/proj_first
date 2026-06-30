@@ -45,7 +45,7 @@ def predict_consumption(
 
 
 def create_app(config: dict[str, Any] | None = None) -> Flask:
-    app = Flask(__name__, template_folder=".", static_folder="static")
+    app = Flask(__name__, static_folder="static")
     app.config.update(
         SECRET_KEY="dev-secret-change-before-production",
     )

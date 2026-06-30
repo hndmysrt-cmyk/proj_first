@@ -4,19 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إدخال بيانات التنبؤ</title>
-    <link rel="stylesheet" href="static/style.css">
-    <script src="static/script.js" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body data-requires-static-login>
+<body>
     <main class="shell">
         <nav class="topbar" aria-label="التنقل الرئيسي">
-            <a class="brand" href="index.html">
+            <a class="brand" href="{{ url_for('home') }}">
                 <span class="brand-mark">⚡</span>
                 <span>مؤشر الطاقة</span>
             </a>
             <div class="nav-actions">
-                <span data-static-username></span>
-                <a class="button secondary" href="index.html" data-static-logout>خروج</a>
+                <span>{{ user.username }}</span>
+                <a class="button secondary" href="{{ url_for('logout') }}">خروج</a>
             </div>
         </nav>
 
@@ -28,8 +27,10 @@
 
             <div class="card">
                 <h2>بيانات التنبؤ</h2>
-                <p class="error" data-static-error hidden></p>
-                <form class="form-grid" data-static-predict>
+                {% if error %}
+                    <p class="error">{{ error }}</p>
+                {% endif %}
+                <form class="form-grid" action="{{ url_for('training') }}" method="POST">
                     <label>
                         التاريخ
                         <input type="date" name="date" required>

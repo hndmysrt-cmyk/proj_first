@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>جارٍ معالجة البيانات</title>
-    <link rel="stylesheet" href="static/style.css">
-    <script src="static/script.js" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
-<body data-requires-static-login data-static-process>
+<body>
     <main class="shell">
         <nav class="topbar" aria-label="التنقل الرئيسي">
-            <a class="brand" href="index.html">
+            <a class="brand" href="{{ url_for('home') }}">
                 <span class="brand-mark">⚡</span>
                 <span>مؤشر الطاقة</span>
             </a>
@@ -28,6 +28,13 @@
                 </ul>
             </div>
         </section>
+
+        <form data-auto-submit action="{{ url_for('preprocess') }}" method="POST" hidden>
+            <input type="hidden" name="date" value="{{ user_data.date }}">
+            <input type="hidden" name="temperature" value="{{ user_data.temperature }}">
+            <input type="hidden" name="working_day" value="{{ user_data.working_day }}">
+            <input type="hidden" name="devices" value="{{ user_data.devices }}">
+        </form>
     </main>
 </body>
 </html>

@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نتيجة التنبؤ</title>
-    <link rel="stylesheet" href="static/style.css">
-    <script src="static/script.js" defer></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
-<body data-requires-static-login data-static-result>
+<body>
     <main class="shell">
         <nav class="topbar" aria-label="التنقل الرئيسي">
-            <a class="brand" href="index.html">
+            <a class="brand" href="{{ url_for('home') }}">
                 <span class="brand-mark">⚡</span>
                 <span>مؤشر الطاقة</span>
             </a>
             <div class="nav-actions">
-                <a class="button secondary" href="sc3.html">تنبؤ جديد</a>
-                <a class="button danger" href="index.html" data-static-logout>تسجيل خروج</a>
+                <a class="button secondary" href="{{ url_for('predict') }}">تنبؤ جديد</a>
+                <a class="button danger" href="{{ url_for('logout') }}">تسجيل خروج</a>
             </div>
         </nav>
 
@@ -24,31 +24,38 @@
             <article class="result-card">
                 <h2>نتيجة التنبؤ باستهلاك الطاقة الكهربائية</h2>
                 <div class="result-value">
-                    <strong data-result-prediction>--</strong>
+                    <strong>{{ result.prediction }}</strong>
                     <span>kWh</span>
                 </div>
-                <p>متوسط الخطأ المطلق (MAE): <span data-result-mae>--</span></p>
+                <p>متوسط الخطأ المطلق (MAE): {{ result.mae }}</p>
 
                 <div class="result-meta" aria-label="تفاصيل المدخلات">
                     <div>
                         <span>التاريخ</span>
-                        <b data-result-date>--</b>
+                        <b>{{ result.date }}</b>
                     </div>
                     <div>
                         <span>درجة الحرارة</span>
-                        <b data-result-temperature>--</b>
+                        <b>{{ result.temperature }}°C</b>
                     </div>
                     <div>
                         <span>يوم عمل</span>
-                        <b data-result-working-day>--</b>
+                        <b>{{ "نعم" if result.working_day else "لا" }}</b>
                     </div>
                     <div>
                         <span>عدد الأجهزة</span>
-                        <b data-result-devices>--</b>
+                        <b>{{ result.devices }}</b>
                     </div>
                 </div>
 
-                <div class="bars" aria-label="رسم بياني تقريبي للاستهلاك" data-static-chart></div>
+                {% set max_value = result.chart|max %}
+                <div class="bars" aria-label="رسم بياني تقريبي للاستهلاك">
+                    {% for value in result.chart %}
+                        <div class="bar" data-chart-value="{{ value }}" data-chart-max="{{ max_value }}">
+                            <span>{{ value }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
             </article>
         </section>
     </main>

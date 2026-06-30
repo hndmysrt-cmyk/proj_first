@@ -1,4 +1,5 @@
 import unittest
+from pathlib import Path
 
 from app import create_app, predict_consumption
 
@@ -13,6 +14,15 @@ class AppTestCase(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertIn("نظام للتنبؤ", response.get_data(as_text=True))
+
+    def test_root_pages_are_static_github_pages_files(self):
+        repo_root = Path(__file__).resolve().parents[1]
+
+        for filename in ["index.html", "sc1.html", "sc2.html", "sc3.html", "sc4.html", "sc5.html"]:
+            html = (repo_root / filename).read_text(encoding="utf-8")
+            with self.subTest(filename=filename):
+                self.assertNotIn("{{", html)
+                self.assertNotIn("url_for", html)
 
     def test_legacy_sc1_route_loads_home_page(self):
         response = self.client.get("/sc1.html")
